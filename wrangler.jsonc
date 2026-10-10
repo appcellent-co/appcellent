@@ -1,5 +1,5 @@
 {
-  // appcellent.co + tüm <app>.appcellent.co siteleri — Cloudflare Pages, host-bazlı yönlendirme functions/_middleware.js'te
+  // appcellent.com + tüm <app>.appcellent.com siteleri (eski .co → 301) — Cloudflare Pages, yönlendirme functions/_middleware.js'te
   // Deploy: sh build.sh && CLOUDFLARE_API_TOKEN=$(cat ~/.config/appcellent/cloudflare/api-token) npx wrangler pages deploy
   "name": "appcellent-web",
   "pages_build_output_dir": "./public",

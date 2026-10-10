@@ -4,119 +4,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Getby - Estimated Delivery Dates for Shopify</title>
-    <meta name="description"
-        content="Show accurate estimated delivery dates on your Shopify product and cart pages. Cutoff countdown, working days, holidays and country-based rules.">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚚</text></svg>">
+    <title>Getby | Estimated Delivery Dates for Shopify</title>
+    <meta name="description" content="Getby shows accurate estimated delivery dates and a cutoff countdown on your Shopify product and cart pages.">
+    <link rel="canonical" href="https://getby.appcellent.com/">
+    <meta property="og:title" content="Getby | Estimated Delivery Dates for Shopify">
+    <meta property="og:description" content="Getby shows accurate estimated delivery dates and a cutoff countdown on your Shopify product and cart pages.">
+    <meta property="og:url" content="https://getby.appcellent.com/">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/styles/site.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0a0a%22/><text x=%2216%22 y=%2223%22 font-size=%2219%22 font-family=%22Helvetica,Arial%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>A</text></svg>">
 </head>
 
 <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="star" viewBox="0 0 16 16"><path fill="currentColor" d="M8 1.2l2.06 4.38 4.74.6-3.48 3.3.88 4.72L8 11.9l-4.2 2.3.88-4.72L1.2 6.18l4.74-.6z"/></symbol>
+        <symbol id="mark" viewBox="0 0 26 26"><rect width="26" height="26" rx="6" fill="currentColor"/><path fill="var(--mark-fg, #fff)" d="M9.1 18.5H6.9L11.8 7.5h2.4l4.9 11h-2.2l-1.1-2.6H10.2l-1.1 2.6zm1.8-4.3h4.2L13 9.6l-2.1 4.6z"/></symbol>
+    </svg>
 
-    <header>
-        <div class="container">
-            <nav>
-                <a href="/" class="logo">Getby</a>
-                <div class="nav-links">
-                    <a href="/faq">FAQ</a>
-                    <a href="/privacy">Privacy</a>
-                </div>
+    <header class="site-header">
+        <div class="wrap">
+            <a href="/" class="logo" aria-label="Getby home"><svg><use href="#mark"/></svg>Getby</a>
+            <nav class="nav" id="nav" aria-label="Main">
+                <a href="/#features">Features</a>
+                <a href="/faq">FAQ</a>
+                <a href="/privacy">Privacy</a>
+                <a href="https://appcellent.com/support" class="menu-only">Contact us</a>
             </nav>
+            <div class="header-actions">
+                <span class="soon">Coming soon to Shopify</span>
+                <a href="https://appcellent.com/support" class="btn btn-primary btn-sm">Contact us</a>
+            </div>
+            <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span></button>
         </div>
     </header>
 
     <main>
         <section class="hero">
-            <div class="container">
-                <h1>Show Shoppers Exactly When Their Order Arrives</h1>
-                <p>Getby displays accurate "Get it by" delivery dates on your product and cart pages — with a live countdown to your order cutoff. Fewer support tickets, more confident buyers.</p>
-                <a href="#" class="cta-button">Coming Soon on Shopify</a>
+            <div class="wrap">
+                <div class="hero-copy">
+                    <h1>Show shoppers when their order arrives.</h1>
+                    <p>Getby adds an accurate "Get it by" date to your product and cart pages, with a live countdown to your
+                        order cutoff. Fewer "where's my order" emails, more confident buyers.</p>
+                    <div class="hero-actions">
+                        <a href="https://appcellent.com/support" class="btn btn-primary">Get notified at launch</a>
+                        <a href="/faq" class="btn btn-secondary">Read the FAQ</a>
+                    </div>
+                    <div class="rating-note"><span>Coming soon to the Shopify App Store · Free plan included</span></div>
+                </div>
+                <div class="hero-media shop-media" aria-hidden="true">
+                    <div class="mock-product">
+                        <div class="mock-img"></div>
+                        <div class="mock-lines"><i></i><i class="short"></i></div>
+                        <div class="mock-price">$48.00</div>
+                        <div class="mock-eta">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.5"/><circle cx="17" cy="17.5" r="1.5"/></svg>
+                            <div><b>Get it by Thursday, Oct 16</b><span>Order within 2h 14m</span></div>
+                        </div>
+                        <div class="mock-btn">Add to cart</div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="section" style="background-color: var(--bg-secondary);">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 48px; font-size: 40px; font-weight: 600;">Features</h2>
-                <div class="grid">
+        <section id="features" class="section">
+            <div class="wrap">
+                <div class="section-title">
+                    <h2>Everything you need for honest delivery dates</h2>
+                    <p>Set it up once. Getby keeps the promise on your page in line with how you really ship.</p>
+                </div>
+                <div class="cards">
                     <div class="card">
-                        <h3>📅 Accurate Dates</h3>
-                        <p>Order cutoff time, working days, holidays and your shop's timezone are all taken into account — so the promise on the page matches reality.</p>
+                        <h3>Accurate dates</h3>
+                        <p>Cutoff time, working days, holidays and your shop's timezone are all taken into account.</p>
                     </div>
                     <div class="card">
-                        <h3>⏳ Cutoff Countdown</h3>
-                        <p>A live "order within 2h 14m" countdown nudges shoppers to buy today instead of tomorrow.</p>
+                        <h3>Cutoff countdown</h3>
+                        <p>A live "order within 2h 14m" message nudges shoppers to buy today instead of tomorrow.</p>
                     </div>
                     <div class="card">
-                        <h3>🎯 Flexible Rules</h3>
-                        <p>Target delivery times by product, collection, tag or destination country, with exclusions and a default rule as fallback.</p>
+                        <h3>Flexible rules</h3>
+                        <p>Set delivery times by product, collection, tag or destination country, with exclusions and a default rule.</p>
                     </div>
                     <div class="card">
-                        <h3>🎨 Matches Your Theme</h3>
-                        <p>Ready-made design presets, custom colors, fonts and per-language translations. Installs as a theme app block — no code edits.</p>
+                        <h3>Matches your theme</h3>
+                        <p>Ready-made presets, your own colors and fonts, and translations for every language you sell in.</p>
                     </div>
                     <div class="card">
-                        <h3>🛒 Product & Cart Pages</h3>
-                        <p>Show estimates where the decision happens: on the product page and again in the cart.</p>
+                        <h3>Product and cart pages</h3>
+                        <p>Show the estimate where the decision happens: on the product page and again in the cart.</p>
                     </div>
                     <div class="card">
-                        <h3>🧹 Clean Uninstall</h3>
-                        <p>Everything lives in a theme app extension. Uninstall the app and nothing is left behind in your theme.</p>
+                        <h3>Clean uninstall</h3>
+                        <p>Getby runs as a theme app block. Remove the app and nothing is left behind in your theme.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section values">
+            <div class="wrap">
+                <div class="section-title">
+                    <h2>Live in three steps</h2>
+                </div>
+                <div class="cards">
+                    <div class="card"><span class="step-num">1</span><h3>Create rules</h3><p>Start with a default delivery time, then add rules for specific products, collections, tags or countries.</p></div>
+                    <div class="card"><span class="step-num">2</span><h3>Add the widget</h3><p>One click opens your theme editor with the "Delivery estimate" block already added. Hit Save.</p></div>
+                    <div class="card"><span class="step-num">3</span><h3>Publish</h3><p>Preview it in draft mode, then publish when you're ready. Changes go live instantly.</p></div>
                 </div>
             </div>
         </section>
 
         <section class="section">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 48px; font-size: 40px; font-weight: 600;">How It Works</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3>1. Create rules</h3>
-                        <p>Start with a default delivery time, then add targeted rules for specific products, collections, tags or countries.</p>
+            <div class="wrap">
+                <div class="section-title">
+                    <h2>Simple pricing</h2>
+                    <p>Billing is handled by Shopify. Cancel any time from inside the app.</p>
+                </div>
+                <div class="pricing">
+                    <div class="plan">
+                        <h3>Free</h3>
+                        <div class="price">$0</div>
+                        <ul class="checks">
+                            <li>One store-wide delivery rule</li>
+                            <li>Cutoff time, working days and holidays</li>
+                            <li>All widget templates and languages</li>
+                        </ul>
                     </div>
-                    <div class="card">
-                        <h3>2. Add the widget</h3>
-                        <p>One click opens your theme editor with the "Delivery estimate" block pre-added. Hit Save — that's it.</p>
-                    </div>
-                    <div class="card">
-                        <h3>3. Publish</h3>
-                        <p>Preview safely in draft mode, then publish when you're ready. Changes go live instantly.</p>
+                    <div class="plan plan-pro">
+                        <h3>Pro</h3>
+                        <div class="price">$9.99<span>/month</span></div>
+                        <p class="price-alt">or $49.99 per year · 7-day free trial</p>
+                        <ul class="checks">
+                            <li>Everything in Free</li>
+                            <li>Unlimited rules</li>
+                            <li>Country and tag targeting, exclusions</li>
+                            <li>Priority support</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
+
     </main>
 
-    <footer>
-        <div class="container">
+    <footer class="site-footer">
+        <div class="wrap">
             <div class="footer-grid">
-                <div class="footer-links">
-                    <h4>Product</h4>
+                <div>
+                    <a href="/" class="logo" aria-label="Getby home"><svg style="color:#fdfdfc;--mark-fg:#0a0a0a"><use href="#mark"/></svg>Getby</a>
+                    <p style="margin-top:12px;max-width:280px">Estimated delivery dates and cutoff countdowns for Shopify stores.</p>
+                </div>
+                <div>
+                    <h4>Getby</h4>
                     <ul>
+                        <li><a href="/#features">Features</a></li>
                         <li><a href="/faq">FAQ</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
+                <div>
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="https://appcellent.com/support">Contact us</a></li>
+                        <li><a href="mailto:support@appcellent.com">support@appcellent.com</a></li>
+                    </ul>
+                </div>
+                <div>
                     <h4>Legal</h4>
                     <ul>
                         <li><a href="/privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
+                <div>
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="https://appcellent.co">Appcellent</a></li>
+                        <li><a href="https://appcellent.com">Appcellent</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                &copy; 2026 Appcellent. All rights reserved.
+            <div class="footer-bottom">
+                <span>&copy; <span id="year">2026</span> Appcellent. Getby is made by Appcellent.</span>
             </div>
         </div>
     </footer>
 
-    <script src="../scripts/app.js"></script>
+    <script>
+        const header = document.querySelector('.site-header');
+        const menuBtn = document.querySelector('.menu-btn');
+        menuBtn.addEventListener('click', () => {
+            menuBtn.setAttribute('aria-expanded', header.classList.toggle('menu-open'));
+        });
+        document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => {
+            header.classList.remove('menu-open');
+            menuBtn.setAttribute('aria-expanded', 'false');
+        }));
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 
 </html>

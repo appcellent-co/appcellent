@@ -1,12 +1,11 @@
 {
   "name": "appcellent",
   "version": "1.0.0",
-  "description": "Appcellent - Crafting Premium iOS Experiences",
+  "description": "appcellent.com \u2014 Cloudflare Pages",
   "scripts": {
-    "dev": "vercel dev",
-    "build": "echo 'Static site - no build needed'",
-    "start": "python3 server.py",
-    "start:simple": "python3 -m http.server 8000"
+    "build": "sh build.sh",
+    "dev": "sh build.sh && npx wrangler pages dev public",
+    "deploy": "sh build.sh && npx wrangler pages deploy public --project-name appcellent-web --branch main"
   },
   "devDependencies": {}
 }
