@@ -1,11 +1,12 @@
 # appcellent.com
 
-Appcellent'ın şirket sitesi + kendi alan adı olmayan Shopify app'lerinin alt siteleri. Cloudflare Pages projesi `appcellent-web`.
+Appcellent'ın şirket sitesi. Cloudflare Pages projesi `appcellent-web`.
 
 ## Yapı
 
 - `main/` — appcellent.com (ana sayfa, Help Center + makaleler, Support, Privacy, Terms)
-- `limify/`, `getby/` — `limify.appcellent.com`, `getby.appcellent.com` (Shopify, yakında)
+- `limify/`, `getby/` — Shopify app alt siteleri; appcellent.com'dan link YOK (Uponatime'a taşınacak, Shopify privacy URL'leri bozulmasın diye şimdilik yayında)
+- `main/updates.html` + `updates.xml` — What's new; appliftr `Scripts/appcellent-updates.mjs` App Store sürüm geçmişinden üretir (ana sayfadaki "Recently updated" kartlarını da günceller)
 - `styles/site.css` — tüm sayfaların tek stil dosyası (Kajabi tarzı; mavi #0048f4 sadece buton/link)
 - `404.html` — tüm host'lar için ortak 404
 - `functions/_middleware.js` — host'a göre yönlendirme:

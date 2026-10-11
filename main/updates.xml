@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Appcellent: What's new</title>
+  <link>https://appcellent.com/updates</link>
+  <atom:link href="https://appcellent.com/updates.xml" rel="self" type="application/rss+xml"/>
+  <description>New features and releases across Appcellent apps.</description>
+  <language>en</language>
+  <item>
+    <title>Protractor 4.1</title>
+    <link>https://appcellent.com/updates?app=protractor</link>
+    <guid isPermaLink="false">protractor-4.1</guid>
+    <pubDate>Sat, 10 Oct 2026 12:00:00 GMT</pubDate>
+    <description>Protractor now speaks 13 more languages, including Danish, Dutch, Norwegian, French and Portuguese. Faster startup, no more tracking prompt, plus bug fixes and performance improvements.</description>
+  </item>
+  <item>
+    <title>TCG Vault 2.0</title>
+    <link>https://appcellent.com/updates?app=tcgvault</link>
+    <guid isPermaLink="false">tcgvault-2.0</guid>
+    <pubDate>Mon, 05 Oct 2026 12:00:00 GMT</pubDate>
+    <description>TCG Vault 2.0 is here!
+• Now on iPad and Apple Watch, plus Home Screen widgets for your vault value.
+• Wishlist: save the cards you want and get notified when they get cheaper.
+• Price alerts: pick a target price for any card.
+• Value chart: watch your collection&#39;s value change over time.
+• Import or export your binders as CSV files.
+• A fresh new look, a smarter scanner and offline support.</description>
+  </item>
+  <item>
+    <title>TCG Vault 1.8</title>
+    <link>https://appcellent.com/updates?app=tcgvault</link>
+    <guid isPermaLink="false">tcgvault-1.8</guid>
+    <pubDate>Mon, 28 Sep 2026 12:00:00 GMT</pubDate>
+    <description>• A smarter scanner that recognizes cards by their artwork — far fewer wrong matches.
+• Prices update every day, now including Cardmarket.
+• Bug fixes and faster loading.</description>
+  </item>
+  <item>
+    <title>Stud Finder 3.0</title>
+    <link>https://appcellent.com/updates?app=studfinder</link>
+    <guid isPermaLink="false">studfinder-3.0</guid>
+    <pubDate>Sun, 27 Sep 2026 12:00:00 GMT</pubDate>
+    <description>A fresh new look and faster metal detection. Plus a new Tools tab to help you hang pictures, mount your TV and more. Now on iPad, too.</description>
+  </item>
+  <item>
+    <title>Volume Booster 2.0</title>
+    <link>https://appcellent.com/updates?app=volumebooster</link>
+    <guid isPermaLink="false">volumebooster-2.0</guid>
+    <pubDate>Tue, 08 Sep 2026 12:00:00 GMT</pubDate>
+    <description>New: Siri &amp; Shortcuts support, free sound-test tools and full iPad support. Faster loading and smoother playback.</description>
+  </item>
+  <item>
+    <title>Protractor 4.0</title>
+    <link>https://appcellent.com/updates?app=protractor</link>
+    <guid isPermaLink="false">protractor-4.0</guid>
+    <pubDate>Thu, 06 Aug 2026 12:00:00 GMT</pubDate>
+    <description>New specialized measuring modes — roof pitch, bubble level, inclinometer, body angle and more — plus full iPad support, new languages and accuracy improvements.</description>
+  </item>
+  <item>
+    <title>Volume Booster 1.5</title>
+    <link>https://appcellent.com/updates?app=volumebooster</link>
+    <guid isPermaLink="false">volumebooster-1.5</guid>
+    <pubDate>Sat, 01 Aug 2026 12:00:00 GMT</pubDate>
+    <description>Save your own custom EQ presets and recall them with a single tap, plus new shuffle and repeat modes for nonstop playback. Control play, pause, and skip right from your lock screen and headphones.</description>
+  </item>
+  <item>
+    <title>Decibel Meter launched</title>
+    <link>https://appcellent.com/updates?app=decibelmeter</link>
+    <guid isPermaLink="false">decibelmeter-launch</guid>
+    <pubDate>Wed, 29 Jul 2026 12:00:00 GMT</pubDate>
+    <description>Decibel Meter arrived on the App Store.</description>
+  </item>
+  <item>
+    <title>TCG Vault 1.7</title>
+    <link>https://appcellent.com/updates?app=tcgvault</link>
+    <guid isPermaLink="false">tcgvault-1.7</guid>
+    <pubDate>Wed, 10 Jun 2026 12:00:00 GMT</pubDate>
+    <description>Variant-aware collections, smarter scanning, and quality-of-life improvements across the board.</description>
+  </item>
+  <item>
+    <title>TCG Vault 1.6</title>
+    <link>https://appcellent.com/updates?app=tcgvault</link>
+    <guid isPermaLink="false">tcgvault-1.6</guid>
+    <pubDate>Sun, 07 Jun 2026 12:00:00 GMT</pubDate>
+    <description>Variant-aware collections, smarter scanning, and quality-of-life improvements across the board.
+  - Card scanning is now faster and more accurate</description>
+  </item>
+  <item>
+    <title>Colorzy launched</title>
+    <link>https://appcellent.com/updates?app=colorzy</link>
+    <guid isPermaLink="false">colorzy-launch</guid>
+    <pubDate>Wed, 03 Jun 2026 12:00:00 GMT</pubDate>
+    <description>Colorzy arrived on the App Store.</description>
+  </item>
+  <item>
+    <title>Volume Booster launched</title>
+    <link>https://appcellent.com/updates?app=volumebooster</link>
+    <guid isPermaLink="false">volumebooster-launch</guid>
+    <pubDate>Mon, 30 Mar 2026 12:00:00 GMT</pubDate>
+    <description>Volume Booster arrived on the App Store.</description>
+  </item>
+  <item>
+    <title>TCG Vault 1.5</title>
+    <link>https://appcellent.com/updates?app=tcgvault</link>
+    <guid isPermaLink="false">tcgvault-1.5</guid>
+    <pubDate>Sat, 28 Feb 2026 12:00:00 GMT</pubDate>
+    <description>Variant-aware collections, smarter scanning, and quality-of-life improvements across the board.
+  - Track card variants separately in your collection — Normal, Holofoil, Reverse Holofoil and more
+  - Card scanning is now faster and more accurate
+  - New &quot;How to Scan&quot; guide for first-time users</description>
+  </item>
+  <item>
+    <title>Protractor 3.0</title>
+    <link>https://appcellent.com/updates?app=protractor</link>
+    <guid isPermaLink="false">protractor-3.0</guid>
+    <pubDate>Sun, 22 Feb 2026 12:00:00 GMT</pubDate>
+    <description>New: Bubble Level tool! Instantly check if any surface is level—now on both iPhone &amp; Apple Watch with haptic feedback.</description>
+  </item>
+  <item>
+    <title>TCG Vault launched</title>
+    <link>https://appcellent.com/updates?app=tcgvault</link>
+    <guid isPermaLink="false">tcgvault-launch</guid>
+    <pubDate>Fri, 06 Feb 2026 12:00:00 GMT</pubDate>
+    <description>TCG Vault arrived on the App Store.</description>
+  </item>
+  <item>
+    <title>Stud Finder 2.0</title>
+    <link>https://appcellent.com/updates?app=studfinder</link>
+    <guid isPermaLink="false">studfinder-2.0</guid>
+    <pubDate>Thu, 29 Jan 2026 12:00:00 GMT</pubDate>
+    <description>Apple Watch Support, Scan walls directly from your wrist! Get real-time haptic feedback and results without reaching for your phone.</description>
+  </item>
+  <item>
+    <title>Protractor 2.0</title>
+    <link>https://appcellent.com/updates?app=protractor</link>
+    <guid isPermaLink="false">protractor-2.0</guid>
+    <pubDate>Wed, 21 Jan 2026 12:00:00 GMT</pubDate>
+    <description>Apple Watch Support is here! Now you can measure angles directly from your wrist with haptic feedback—ideal for hands-free work.</description>
+  </item>
+  <item>
+    <title>Protractor 1.5</title>
+    <link>https://appcellent.com/updates?app=protractor</link>
+    <guid isPermaLink="false">protractor-1.5</guid>
+    <pubDate>Mon, 28 Jul 2025 12:00:00 GMT</pubDate>
+    <description>We&#39;ve added a usage survey to better understand how you use the app. Your feedback will help us develop new features tailored to your needs!</description>
+  </item>
+  <item>
+    <title>Protractor launched</title>
+    <link>https://appcellent.com/updates?app=protractor</link>
+    <guid isPermaLink="false">protractor-launch</guid>
+    <pubDate>Wed, 26 Mar 2025 12:00:00 GMT</pubDate>
+    <description>Protractor arrived on the App Store.</description>
+  </item>
+  <item>
+    <title>Stud Finder launched</title>
+    <link>https://appcellent.com/updates?app=studfinder</link>
+    <guid isPermaLink="false">studfinder-launch</guid>
+    <pubDate>Sat, 08 Feb 2025 12:00:00 GMT</pubDate>
+    <description>Stud Finder arrived on the App Store.</description>
+  </item>
+</channel>
+</rss>
