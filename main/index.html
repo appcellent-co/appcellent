@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
     <title>Appcellent | Apps for iPhone, Android and Shopify</title>
     <meta name="description"
         content="Appcellent makes simple, useful apps: Stud Finder, Protractor, TCG Vault, Volume Booster, Colorzy, Decibel Meter and Limify. Rated 4.3 from 4,700+ App Store ratings.">
@@ -116,7 +117,7 @@
                             <img src="/img/apps/studfinder.png" alt="" width="56" height="56">
                             <div><h3>Stud Finder</h3><span>iPhone and Android · 4.3 from 3,400+ ratings</span></div>
                         </div>
-                        <p>Hang shelves and TVs with confidence. Stud Finder uses your iPhone's magnetic sensor to find the
+                        <p>Hang shelves and TVs with confidence. Stud Finder uses your phone's magnetic sensor to find the
                             screws and nails that sit along each stud.</p>
                         <ul class="checks">
                             <li>Live magnetic reading with sound and vibration</li>
@@ -561,13 +562,15 @@
         // Mobil menü
         const header = document.querySelector('.site-header');
         const menuBtn = document.querySelector('.menu-btn');
-        menuBtn.addEventListener('click', () => {
-            menuBtn.setAttribute('aria-expanded', header.classList.toggle('menu-open'));
-        });
-        document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => {
-            header.classList.remove('menu-open');
-            menuBtn.setAttribute('aria-expanded', 'false');
-        }));
+        const setMenu = (open) => {
+            header.classList.toggle('menu-open', open);
+            document.body.classList.toggle('no-scroll', open);
+            menuBtn.setAttribute('aria-expanded', open);
+        };
+        menuBtn.addEventListener('click', () => setMenu(!header.classList.contains('menu-open')));
+        document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+        matchMedia('(min-width: 901px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
 
         // App sekmeleri (ok tuşlarıyla da gezilir)
         const tabs = [...document.querySelectorAll('[role="tab"]')];
@@ -579,8 +582,11 @@
                 document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
             });
         };
+        const tabBar = document.querySelector('.tabs');
+        const markEnd = () => tabBar.classList.toggle('at-end', tabBar.scrollLeft + tabBar.clientWidth >= tabBar.scrollWidth - 4);
+        tabBar.addEventListener('scroll', markEnd, { passive: true }); markEnd();
         tabs.forEach((t, i) => {
-            t.addEventListener('click', () => select(t));
+            t.addEventListener('click', () => { select(t); t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); });
             t.addEventListener('keydown', e => {
                 const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
                 if (!d) return;
@@ -588,6 +594,22 @@
                 select(next); next.focus();
             });
         });
+
+        // Android'de Google Play butonunu öne al; sadece iPhone'da olan app'lerde bunu belirt
+        if (/android/i.test(navigator.userAgent)) {
+            document.querySelectorAll('.panel-actions').forEach(box => {
+                const play = box.querySelector('a[href*="play.google.com"]');
+                const ios = box.querySelector('a[href*="apps.apple.com"]');
+                if (play && ios) {
+                    play.className = 'btn btn-primary'; ios.className = 'btn btn-ghost-dark';
+                    box.prepend(play);
+                } else if (ios) {
+                    const n = document.createElement('p');
+                    n.className = 'ios-only'; n.textContent = 'iPhone and iPad only for now.';
+                    box.after(n);
+                }
+            });
+        }
 
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>

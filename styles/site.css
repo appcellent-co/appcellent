@@ -427,3 +427,27 @@ h3 { font-size: 28px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 50
 .faq .answer ul { padding-left: 20px; }
 .faq .answer ul li + li, .faq .answer ol li + li { margin-top: 6px; }
 @media (max-width: 900px) { .pricing { grid-template-columns: 1fr; } .shop-media { padding: 32px 20px; } }
+
+/* Mobil ince ayarlar (11 Eki) */
+.menu-btn { width: 44px; height: 44px; margin-right: -10px; }
+body.no-scroll { overflow: hidden; }
+@media (max-width: 900px) {
+    .menu-open .nav { max-height: calc(100dvh - 64px); overflow-y: auto; box-shadow: 0 16px 32px rgba(10,10,10,.08); }
+}
+@media (max-width: 600px) {
+    /* Kayan sekmelerde sağda devamı olduğunu gösteren yumuşak geçiş */
+    .tabs { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); padding-right: 48px; }
+    .tabs.at-end { -webkit-mask-image: none; mask-image: none; }
+    /* Parmakla rahat basılsın: footer ve uygulama kartı linkleri en az 44px */
+    .footer-grid ul { gap: 0; }
+    .footer-grid ul a { display: inline-block; padding: 10px 0; }
+    .footer-bottom a { display: inline-block; padding: 10px 0; }
+    .app-links a { padding: 10px 0; }
+    .app-links { margin-top: 14px; gap: 4px 20px; }
+    .crumbs a { padding: 8px 0; }
+    .chips a { padding: 6px 0; }
+    .hero-media { padding: 28px 8%; }
+    .panel-head h3 { font-size: 24px; }
+    .section-title { margin-bottom: 40px; }
+}
+.ios-only { margin-top: 12px; font-size: 14px; color: var(--on-dark-3); }

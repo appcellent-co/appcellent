@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
     <title>Getby Privacy Policy</title>
     <meta name="description" content="Privacy Policy for Getby, the Shopify app by Appcellent.">
     <link rel="canonical" href="https://getby.appcellent.com/privacy">
@@ -131,13 +132,15 @@
     <script>
         const header = document.querySelector('.site-header');
         const menuBtn = document.querySelector('.menu-btn');
-        menuBtn.addEventListener('click', () => {
-            menuBtn.setAttribute('aria-expanded', header.classList.toggle('menu-open'));
-        });
-        document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => {
-            header.classList.remove('menu-open');
-            menuBtn.setAttribute('aria-expanded', 'false');
-        }));
+        const setMenu = (open) => {
+            header.classList.toggle('menu-open', open);
+            document.body.classList.toggle('no-scroll', open);
+            menuBtn.setAttribute('aria-expanded', open);
+        };
+        menuBtn.addEventListener('click', () => setMenu(!header.classList.contains('menu-open')));
+        document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+        matchMedia('(min-width: 901px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
