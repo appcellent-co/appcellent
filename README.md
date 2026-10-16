@@ -6,7 +6,9 @@ Appcellent'ın şirket sitesi. Cloudflare Pages projesi `appcellent-web`.
 
 - `main/` — appcellent.com (ana sayfa, Help Center + makaleler, Support, Privacy, Terms)
 - `limify/`, `getby/` — Shopify app alt siteleri; appcellent.com'dan link YOK (Uponatime'a taşınacak, Shopify privacy URL'leri bozulmasın diye şimdilik yayında)
-- `main/updates.html` + `updates.xml` — What's new; appliftr `Scripts/appcellent-updates.mjs` App Store sürüm geçmişinden üretir (ana sayfadaki "Recently updated" kartlarını da günceller)
+- `main/updates.html` + `updates.xml` — What's new; `scripts/updates.mjs` App Store sürüm geçmişinden üretir (ana sayfadaki "Recently updated" kartlarını da günceller).
+  **Otomatik:** `.github/workflows/updates.yml` günde 3 kez (05:17/13:17/21:17 UTC) koşar; yeni sürüm varsa commit + deploy eder.
+  Elle tetikleme: `gh workflow run updates.yml -R appcellent-co/appcellent`. Yeni app → `scripts/updates.mjs` içindeki `APPS` listesine ekle.
 - `styles/site.css` — tüm sayfaların tek stil dosyası (Kajabi tarzı; mavi #0048f4 sadece buton/link)
 - `404.html` — tüm host'lar için ortak 404
 - `functions/_middleware.js` — host'a göre yönlendirme:
@@ -24,6 +26,8 @@ sh build.sh && npx wrangler pages dev public
 ```
 
 ## Yayına alma
+
+Bot `main`'e commit atıyor → deploy'dan önce `git pull` (yoksa eski What's new sayfası yayına gider).
 
 ```bash
 sh build.sh && CLOUDFLARE_API_TOKEN=$(cat ~/.config/appcellent/cloudflare/api-token) npx wrangler pages deploy public --project-name appcellent-web --branch main

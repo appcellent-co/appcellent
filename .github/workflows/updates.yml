@@ -1,0 +1,44 @@
+# appcellent.com/updates ("What's new"): App Store'da yeni sürüm çıkınca sayfayı kendisi günceller.
+# Günde 3 kez scripts/updates.mjs koşar; çıktı değiştiyse commit'ler ve Cloudflare Pages'e deploy eder.
+name: What's new
+
+on:
+  schedule:
+    - cron: '17 5,13,21 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: updates
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generate
+        run: node scripts/updates.mjs
+      - name: Changed?
+        id: diff
+        run: |
+          if git diff --quiet -- main/; then echo "changed=false" >> "$GITHUB_OUTPUT"; else echo "changed=true" >> "$GITHUB_OUTPUT"; git diff --stat -- main/; fi
+      - name: Commit
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add main/updates.html main/updates.xml main/index.html
+          git commit -m "What's new: App Store updates"
+          git push
+      - name: Deploy
+        if: steps.diff.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 320c89ee763c9ef2b406863c132b25b6
+        run: sh build.sh && npx --yes wrangler@4 pages deploy public --project-name appcellent-web --branch main --commit-dirty=true
