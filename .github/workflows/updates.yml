@@ -27,13 +27,13 @@ jobs:
       - name: Changed?
         id: diff
         run: |
-          if git diff --quiet -- main/; then echo "changed=false" >> "$GITHUB_OUTPUT"; else echo "changed=true" >> "$GITHUB_OUTPUT"; git diff --stat -- main/; fi
+          if [ -z "$(git status --porcelain -- main data)" ]; then echo "changed=false" >> "$GITHUB_OUTPUT"; else echo "changed=true" >> "$GITHUB_OUTPUT"; git status --short -- main data; fi
       - name: Commit
         if: steps.diff.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add main/updates.html main/updates.xml main/index.html
+          git add main/updates.html main/updates.xml main/index.html data/android.json
           git commit -m "What's new: App Store updates"
           git push
       - name: Deploy

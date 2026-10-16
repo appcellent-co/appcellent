@@ -42,6 +42,30 @@
     <description>Protractor now speaks 13 more languages, including Danish, Dutch, Norwegian, French and Portuguese. Faster startup, no more tracking prompt, plus bug fixes and performance improvements.</description>
   </item>
   <item>
+    <title>Stud Finder for Android 1.1.0</title>
+    <link>https://appcellent.com/updates?app=studfinder</link>
+    <guid isPermaLink="false">studfinder-android-1.1.0</guid>
+    <pubDate>Thu, 08 Oct 2026 12:00:00 GMT</pubDate>
+    <description>• All-new design with a cleaner stud gauge and live signal graph.
+• New Tools tab: bubble level, hang a picture, TV mount height, screws &amp; anchors.
+• Now in 13 languages.</description>
+  </item>
+  <item>
+    <title>Protractor for Android 1.1.1</title>
+    <link>https://appcellent.com/updates?app=protractor</link>
+    <guid isPermaLink="false">protractor-android-1.1.1</guid>
+    <pubDate>Thu, 08 Oct 2026 12:00:00 GMT</pubDate>
+    <description>• Clearer subscription options: try free for 3 days or choose the annual plan
+• Bug fixes and improvements</description>
+  </item>
+  <item>
+    <title>Volume Booster for Android launched</title>
+    <link>https://appcellent.com/updates?app=volumebooster</link>
+    <guid isPermaLink="false">volumebooster-android-launch</guid>
+    <pubDate>Wed, 07 Oct 2026 12:00:00 GMT</pubDate>
+    <description>Volume Booster arrived on Google Play.</description>
+  </item>
+  <item>
     <title>TCG Vault 2.0</title>
     <link>https://appcellent.com/updates?app=tcgvault</link>
     <guid isPermaLink="false">tcgvault-2.0</guid>
@@ -99,6 +123,13 @@
     <description>Decibel Meter arrived on the App Store.</description>
   </item>
   <item>
+    <title>Protractor for Android launched</title>
+    <link>https://appcellent.com/updates?app=protractor</link>
+    <guid isPermaLink="false">protractor-android-launch</guid>
+    <pubDate>Wed, 22 Jul 2026 12:00:00 GMT</pubDate>
+    <description>Protractor arrived on Google Play.</description>
+  </item>
+  <item>
     <title>TCG Vault 1.7</title>
     <link>https://appcellent.com/updates?app=tcgvault</link>
     <guid isPermaLink="false">tcgvault-1.7</guid>
@@ -119,6 +150,13 @@
     <guid isPermaLink="false">colorzy-launch</guid>
     <pubDate>Wed, 03 Jun 2026 12:00:00 GMT</pubDate>
     <description>Colorzy arrived on the App Store.</description>
+  </item>
+  <item>
+    <title>Stud Finder for Android launched</title>
+    <link>https://appcellent.com/updates?app=studfinder</link>
+    <guid isPermaLink="false">studfinder-android-launch</guid>
+    <pubDate>Wed, 20 May 2026 12:00:00 GMT</pubDate>
+    <description>Stud Finder arrived on Google Play.</description>
   </item>
   <item>
     <title>Volume Booster launched</title>

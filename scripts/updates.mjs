@@ -2,11 +2,13 @@
 // appcellent.com/updates ("What's new") sayfasını App Store sürüm geçmişinden üretir.
 //
 // Kaynak: her app'in herkese açık App Store sayfası (us) — sürüm no, tarih ve "What's New" notları orada gömülü.
+// Android: Google Play sürüm geçmişi vermiyor → her koşuda Play sayfasındaki güncel sürüm okunur, data/android.json'da birikir.
 // Otomatik: .github/workflows/updates.yml günde 3 kez koşar; değişiklik varsa commit + Cloudflare Pages deploy.
 // Çıktı (bu repo'ya yazar, commit/deploy etmez):
 //   main/updates.html  — sayfa (header/footer main/help.html'den alınır)
 //   main/updates.xml   — RSS (sadece özellik güncellemeleri + ilk çıkışlar)
 //   main/index.html    — <!-- updates:start --> … <!-- updates:end --> arasındaki "son güncellemeler" kartları
+//   data/android.json  — Google Play sürüm kaydı (elle düzeltilebilir)
 //
 // Kullanım:
 //   node scripts/updates.mjs            # üret
@@ -22,10 +24,11 @@ const DRY = process.argv.includes('--dry');
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15';
 
 const APPS = [
-  { key: 'studfinder', name: 'Stud Finder', id: 6740814424, site: 'https://thestudfinder.app' },
-  { key: 'protractor', name: 'Protractor', id: 6742701087, site: 'https://protractorapp.com' },
+  // play = Google Play paket adı (Android sürümü varsa)
+  { key: 'studfinder', name: 'Stud Finder', id: 6740814424, play: 'co.appcellent.studfinder', site: 'https://thestudfinder.app' },
+  { key: 'protractor', name: 'Protractor', id: 6742701087, play: 'co.appcellent.protractor', site: 'https://protractorapp.com' },
   { key: 'tcgvault', name: 'TCG Vault', id: 6758110523, site: 'https://tcgvault.io' },
-  { key: 'volumebooster', name: 'Volume Booster', id: 6760180638, site: 'https://thevolumebooster.app' },
+  { key: 'volumebooster', name: 'Volume Booster', id: 6760180638, play: 'com.appcellent.volumebooster', site: 'https://thevolumebooster.app' },
   { key: 'colorzy', name: 'Colorzy', id: 6772468073, site: 'https://coloringmaker.app' },
   { key: 'decibelmeter', name: 'Decibel Meter', id: 6793045784, site: 'https://noiselevel.app' },
 ];
@@ -63,7 +66,11 @@ async function history(app) {
     if (!out.length && look.version !== '1.0') out.push({ version: look.version, date: look.currentVersionReleaseDate.slice(0, 10), notes: (look.releaseNotes || '').trim() });
     out.push({ version: '1.0', date: launch, notes: '', launch: true });
   }
-  // sürümü yeni→eski sırala; bir önceki sürümle aynı notu taşıyan sürüm = düzeltme sürümü
+  return markMinor(out).map((e) => ({ ...e, app }));
+}
+
+// sürümü yeni→eski sırala; bir önceki sürümle aynı notu taşıyan sürüm = düzeltme sürümü
+function markMinor(out) {
   out.sort((a, b) => b.date.localeCompare(a.date) || (b.launch ? -1 : 1));
   for (let k = 0; k < out.length; k++) {
     const e = out[k];
@@ -71,8 +78,55 @@ async function history(app) {
     e.minor = !e.launch && (!e.notes || GENERIC.test(e.notes) || (older && older.notes && older.notes === e.notes));
     e.repeatOf = !e.launch && older && older.notes && older.notes === e.notes ? older.version : null;
   }
-  return out.map((e) => ({ ...e, app }));
+  return out;
 }
+
+// Play sayfa verisi JSPB: dizi kısa kalınca sondaki nesne {"<alan no>": …} taşır (alan no = indeks + 1)
+const at = (arr, i) => {
+  if (!Array.isArray(arr)) return undefined;
+  const last = arr[arr.length - 1];
+  const sparse = last && typeof last === 'object' && !Array.isArray(last) ? last : null;
+  return i < arr.length - (sparse ? 1 : 0) ? arr[i] : sparse?.[i + 1];
+};
+const unhtml = (s) => s.replace(/<br\s*\/?>/g, '\n').replace(/<[^>]+>/g, '')
+  .replace(/&(amp|lt|gt|quot|#39);/g, (_, c) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" }[c])).trim();
+
+async function playInfo(pkg) {
+  const html = await (await fetch(`https://play.google.com/store/apps/details?id=${pkg}&hl=en_US&gl=US`, { headers: { 'User-Agent': UA } })).text();
+  const m = html.match(/AF_initDataCallback\(\{key: 'ds:5', hash: '[^']*', data:([\s\S]*?), sideChannel: \{\}\}\);/);
+  if (!m) throw new Error(`Google Play sayfası okunamadı: ${pkg}`);
+  const d = JSON.parse(m[1])[1][2];
+  const released = at(d, 10)?.[0];
+  const ts = at(d, 145)?.[0]?.[1]?.[0];
+  const notes = at(d, 144)?.[1]?.[1];
+  return {
+    version: at(d, 140)?.[0]?.[0]?.[0] || null,
+    released: released ? new Date(`${released} 12:00 UTC`).toISOString().slice(0, 10) : null,
+    updated: ts ? new Date(ts * 1000).toISOString().slice(0, 10) : null,
+    notes: notes ? unhtml(notes) : '',
+  };
+}
+
+const PLAY_STATE = path.join(WEB, 'data/android.json');
+const playState = fs.existsSync(PLAY_STATE) ? JSON.parse(fs.readFileSync(PLAY_STATE, 'utf8')) : {};
+
+async function androidHistory(app) {
+  const log = (playState[app.play] ||= []);
+  try {
+    const p = await playInfo(app.play);
+    if (!log.length && p.released) {
+      // ilk kayıt: güncel sürüm çıkıştan bu yana güncellenmediyse çıkış sürümüdür
+      const same = p.version && (!p.updated || Math.abs(Date.parse(p.updated) - Date.parse(p.released)) <= 3 * 864e5);
+      log.push({ version: same ? p.version : null, date: p.released, notes: '', launch: true });
+    }
+    if (p.version && !log.some((e) => e.version === p.version)) log.push({ version: p.version, date: p.updated || today, notes: p.notes });
+  } catch (err) {
+    console.log(`::warning::${err.message}`); // Play okunamazsa kayıttakiyle devam (iOS güncellemesi takılmasın)
+  }
+  return markMinor(log.map((e) => ({ ...e }))).map((e) => ({ ...e, app, platform: 'android' }));
+}
+
+const label = (e) => e.app.name + (e.platform === 'android' ? ' for Android' : '');
 
 function notesHtml(text) {
   const lines = text.split(/\n+/).map((l) => l.trim()).filter(Boolean);
@@ -85,7 +139,8 @@ function notesHtml(text) {
 
 function entryHtml(e) {
   const a = e.app;
-  const store = `https://apps.apple.com/app/id${a.id}`;
+  const android = e.platform === 'android';
+  const store = android ? `https://play.google.com/store/apps/details?id=${a.play}` : `https://apps.apple.com/app/id${a.id}`;
   const tags = [];
   if (e.launch) tags.push('<span class="tag tag-dark">Launch</span>');
   else if (major(e.version)) tags.push('<span class="tag tag-dark">Major update</span>');
@@ -94,23 +149,23 @@ function entryHtml(e) {
     const what = e.repeatOf ? `Fixes and refinements for version ${esc(e.repeatOf)}.` : 'Bug fixes and stability improvements.';
     return `<li class="upd upd-minor" data-app="${a.key}">
                         <img src="/img/apps/${a.key}.png" alt="" width="28" height="28" loading="lazy">
-                        <span class="upd-line"><b>${esc(a.name)} ${esc(e.version)}</b> ${what}</span>
+                        <span class="upd-line"><b>${esc(label(e))} ${esc(e.version)}</b> ${what}</span>
                         <time datetime="${e.date}">${fmtDate(e.date)}</time>
                     </li>`;
   }
   const body = e.launch
-    ? `<p>${esc(a.name)} arrived on the App Store.</p>`
+    ? `<p>${esc(a.name)} arrived on ${android ? 'Google Play' : 'the App Store'}.</p>`
     : notesHtml(e.notes);
   return `<li class="upd${e.launch ? ' upd-launch' : ''}" data-app="${a.key}">
                         <div class="upd-head">
                             <img src="/img/apps/${a.key}.png" alt="" width="44" height="44" loading="lazy">
                             <div>
-                                <h3>${esc(a.name)} <span class="ver">${e.launch ? 'v1.0' : 'v' + esc(e.version)}</span></h3>
+                                <h3>${esc(label(e))} <span class="ver">v${esc(e.launch && !android ? '1.0' : e.version || '1.0')}</span></h3>
                                 <div class="upd-meta"><time datetime="${e.date}">${fmtDate(e.date)}</time>${tags.join('')}</div>
                             </div>
                         </div>
                         <div class="upd-body">${body}</div>
-                        <div class="upd-links"><a class="text-link" href="${store}">Get it on the App Store</a><a class="arrow" href="${a.site}">${esc(a.name)} website</a></div>
+                        <div class="upd-links"><a class="text-link" href="${store}">Get it on ${android ? 'Google Play' : 'the App Store'}</a><a class="arrow" href="${a.site}">${esc(a.name)} website</a></div>
                     </li>`;
 }
 
@@ -182,6 +237,11 @@ async function main() {
     const h = await history(app);
     all.push(...h);
     console.log(`${app.name}: ${h.length} sürüm (son ${h[0]?.version} · ${h[0]?.date})`);
+    if (app.play) {
+      const g = await androidHistory(app);
+      all.push(...g);
+      console.log(`${app.name} Android: ${g.length} sürüm (son ${g[0]?.version} · ${g[0]?.date})`);
+    }
   }
   // Güvenlik: App Store sayfası bozuk/eksik dönerse eski sayfayı ezme
   const prev = fs.existsSync(path.join(WEB, 'main/updates.html')) ? fs.readFileSync(path.join(WEB, 'main/updates.html'), 'utf8') : '';
@@ -193,9 +253,12 @@ async function main() {
   const since = all[all.length - 1].date;
   console.log(`toplam ${all.length} (özellik/çıkış ${features.length}, küçük ${minorCount}), ilk ${since}`);
   if (DRY) return;
+  fs.mkdirSync(path.dirname(PLAY_STATE), { recursive: true });
+  fs.writeFileSync(PLAY_STATE, JSON.stringify(playState, null, 2) + '\n');
 
   // Son sürümler şeridi
-  const latest = APPS.map((a) => all.find((e) => e.app.key === a.key && !e.launch) || all.find((e) => e.app.key === a.key));
+  const ios = all.filter((e) => e.platform !== 'android');
+  const latest = APPS.map((a) => ios.find((e) => e.app.key === a.key && !e.launch) || ios.find((e) => e.app.key === a.key));
   const latestHtml = latest.map((e) => `                    <button class="latest app-chip" data-app="${e.app.key}" aria-pressed="false">
                         <img src="/img/apps/${e.app.key}.png" alt="" width="40" height="40">
                         <span><b>${esc(e.app.name)}</b><small>v${esc(e.launch ? '1.0' : e.version)} · ${rel(e.date)}</small></span>
@@ -267,11 +330,11 @@ ${timeline}
   <description>New features and releases across Appcellent apps.</description>
   <language>en</language>
 ${features.slice(0, 40).map((e) => `  <item>
-    <title>${esc(e.app.name)} ${e.launch ? 'launched' : esc(e.version)}</title>
+    <title>${esc(label(e))} ${e.launch ? 'launched' : esc(e.version)}</title>
     <link>https://appcellent.com/updates?app=${e.app.key}</link>
-    <guid isPermaLink="false">${e.app.key}-${e.launch ? 'launch' : e.version}</guid>
+    <guid isPermaLink="false">${e.app.key}${e.platform === 'android' ? '-android' : ''}-${e.launch ? 'launch' : e.version}</guid>
     <pubDate>${new Date(e.date + 'T12:00:00Z').toUTCString()}</pubDate>
-    <description>${esc(e.launch ? `${e.app.name} arrived on the App Store.` : e.notes)}</description>
+    <description>${esc(e.launch ? `${e.app.name} arrived on ${e.platform === 'android' ? 'Google Play' : 'the App Store'}.` : e.notes)}</description>
   </item>`).join('\n')}
 </channel>
 </rss>
@@ -287,7 +350,7 @@ ${features.slice(0, 40).map((e) => `  <item>
     const first = lines.find((l) => l.length >= 40) || lines.join(' ');
     const short = first.length > 150 ? first.slice(0, first.lastIndexOf(' ', 147)) + '…' : first;
     return `                    <a class="card upd-card" href="/updates?app=${e.app.key}">
-                        <div class="upd-card-head"><img src="/img/apps/${e.app.key}.png" alt="" width="36" height="36" loading="lazy"><div><b>${esc(e.app.name)} ${esc(e.version)}</b><small>${rel(e.date)}</small></div></div>
+                        <div class="upd-card-head"><img src="/img/apps/${e.app.key}.png" alt="" width="36" height="36" loading="lazy"><div><b>${esc(label(e))} ${esc(e.version)}</b><small>${rel(e.date)}</small></div></div>
                         <p>${esc(short)}</p>
                         <span class="arrow">See what's new</span>
                     </a>`;

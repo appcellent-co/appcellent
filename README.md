@@ -9,6 +9,7 @@ Appcellent'ın şirket sitesi. Cloudflare Pages projesi `appcellent-web`.
 - `main/updates.html` + `updates.xml` — What's new; `scripts/updates.mjs` App Store sürüm geçmişinden üretir (ana sayfadaki "Recently updated" kartlarını da günceller).
   **Otomatik:** `.github/workflows/updates.yml` günde 3 kez (05:17/13:17/21:17 UTC) koşar; yeni sürüm varsa commit + deploy eder.
   Elle tetikleme: `gh workflow run updates.yml -R appcellent-co/appcellent`. Yeni app → `scripts/updates.mjs` içindeki `APPS` listesine ekle.
+  Android: Play sürüm geçmişi vermediği için güncel sürüm her koşuda okunur ve `data/android.json`'a eklenir (Android'i olan app'te `APPS`'e `play: '<paket>'`).
 - `styles/site.css` — tüm sayfaların tek stil dosyası (Kajabi tarzı; mavi #0048f4 sadece buton/link)
 - `404.html` — tüm host'lar için ortak 404
 - `functions/_middleware.js` — host'a göre yönlendirme:
