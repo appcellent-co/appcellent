@@ -1,0 +1,43 @@
+name: Preview deploy (develop → preview.appcellent.com)
+
+# develop = design/UI work (Nergis) before it goes live. Every push builds the site and deploys
+# it as a Cloudflare Pages *preview* (branch develop of the `appcellent-web` project), served on
+# https://preview.appcellent.com. Production (main → appcellent.com) is untouched: deploy.yml only runs
+# on main, and preview/ is never part of the production build.
+#
+# preview/prepare.sh locks the preview build: one password for the whole site (no username),
+# noindex everywhere, no analytics / ad tags (preview/gate.js). Password = Pages project →
+# Settings → Variables (Preview) → PREVIEW_PASSWORD, copy in ~/.config/appcellent/preview/password.
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch: {}
+
+concurrency:
+  group: preview-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build
+        run: sh build.sh
+
+      - name: Lock the preview (password, noindex, no analytics)
+        run: sh preview/prepare.sh public
+
+      - name: Deploy to preview.appcellent.com
+        run: npx --yes wrangler@4 pages deploy public --project-name=appcellent-web --branch=develop --commit-dirty=true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 320c89ee763c9ef2b406863c132b25b6
