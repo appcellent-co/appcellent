@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/styles/site.css">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230a0a0a%22/><text x=%2216%22 y=%2223%22 font-size=%2219%22 font-family=%22Helvetica,Arial%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>A</text></svg>">
 </head>
 
@@ -113,6 +114,7 @@
                                 <input id="f-website" name="website" tabindex="-1" autocomplete="off">
                             </div>
                             <input type="hidden" name="t0" id="t0">
+                            <div class="cf-turnstile" data-sitekey="0x4AAAAAAFbmTQ7LWKRsjfWC" data-appearance="interaction-only" data-theme="light"></div>
                             <div class="form-actions">
                                 <button class="btn btn-primary" type="submit">Send message</button>
                                 <small>By sending, you agree to our <a class="text-link" href="/privacy">Privacy Policy</a>.</small>
@@ -229,8 +231,11 @@
                 status.className = 'form-status err';
                 status.textContent = err.message === 'invalid'
                     ? 'Please fill in your email and a short message.'
+                    : err.message === 'challenge'
+                    ? 'We could not verify your browser. Please wait a moment and try again.'
                     : 'Something went wrong. Please email support@appcellent.com instead.';
                 btn.disabled = false; btn.textContent = 'Send message';
+                window.turnstile?.reset();
             }
         });
     </script>

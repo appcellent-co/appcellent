@@ -1,7 +1,9 @@
 // POST /api/contact — appcellent.com/support formu → Resend ile support@appcellent.com'a mail.
 // Gerekli secret: RESEND_API_KEY (wrangler pages secret put RESEND_API_KEY --project-name appcellent-web)
 // Gönderen adres CONTACT_FROM ile değiştirilebilir; alan adının Resend'de doğrulanmış olması şart.
-// Spam koruması: gizli "website" alanı (bot doldurur) + formun 3 sn'den kısa sürede gönderilmesi reddedilir.
+// Spam koruması: gizli "website" alanı (bot doldurur) + formun 3 sn'den kısa sürede gönderilmesi reddedilir
+// + Cloudflare Turnstile (secret TURNSTILE_SECRET; widget "appcellent.com support form", secret yedeği
+// ~/.config/appcellent/turnstile/appcellent-web.secret). Eki 2026'da bir bot ilk ikisini geçip her gün "fiyat?" yazıyordu.
 
 const TO = 'support@appcellent.com';
 const DEFAULT_FROM = 'Appcellent Support Form <form@mail.appcellent.com>';
@@ -12,7 +14,7 @@ const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>
 export async function onRequestPost({ request, env }) {
   const wantsJson = (request.headers.get('accept') || '').includes('application/json');
   const reply = (ok, error) => wantsJson
-    ? Response.json(ok ? { ok: true } : { ok: false, error }, { status: ok ? 200 : (error === 'invalid' ? 400 : 500) })
+    ? Response.json(ok ? { ok: true } : { ok: false, error }, { status: ok ? 200 : ({ invalid: 400, challenge: 403 }[error] || 500) })
     : Response.redirect(new URL(ok ? '/support?sent=1' : `/support?error=${error}`, request.url).toString(), 303);
 
   let form;
@@ -21,6 +23,19 @@ export async function onRequestPost({ request, env }) {
   // Bot: gizli alan dolu ya da form çok hızlı gönderildi → sessizce "gönderildi" de.
   const t0 = Number(form.get('t0'));
   if (clean(form.get('website'), 200) || (t0 && Date.now() - t0 < 3000)) return reply(true);
+
+  // Turnstile: secret tanımlıysa token zorunlu (token tek kullanımlık, sayfa her denemede yeniler).
+  if (env.TURNSTILE_SECRET) {
+    const ts = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      body: new URLSearchParams({
+        secret: env.TURNSTILE_SECRET,
+        response: clean(form.get('cf-turnstile-response'), 2048),
+        remoteip: request.headers.get('CF-Connecting-IP') || '',
+      }),
+    }).then((r) => r.json()).catch(() => ({ success: false }));
+    if (!ts.success) return reply(false, 'challenge');
+  }
 
   const name = clean(form.get('name'), 100);
   const email = clean(form.get('email'), 200);
