@@ -1,0 +1,30 @@
+# Appcellent
+
+> Appcellent is a small app studio that makes simple utility apps for iPhone, iPad and Android: Stud Finder, Protractor, TCG Vault, Volume Booster, Colorzy and Decibel Meter. Each app does one job. All are free to download; some offer an optional subscription for extra features. The company is Appcellent Yazılım Hizmetleri A.Ş. (Nilüfer, Bursa, Türkiye).
+
+Each app has its own website with guides and free web tools. Release notes for every app are on one page: https://appcellent.com/updates
+
+## Apps
+
+- [Stud Finder](https://thestudfinder.app/): finds the screws and nails that sit along wall studs with the phone's magnetic sensor, with sound and vibration. iPhone and Android. [App Store](https://apps.apple.com/app/id6740814424) · [Google Play](https://play.google.com/store/apps/details?id=co.appcellent.studfinder)
+- [Protractor](https://protractorapp.com/): measures angles with the camera, the edge of the phone or by touch; bubble level and inclinometer built in. iPhone and Android. [App Store](https://apps.apple.com/app/id6742701087) · [Google Play](https://play.google.com/store/apps/details?id=co.appcellent.protractor)
+- [TCG Vault](https://tcgvault.io/): scans trading cards (Pokémon, Magic: The Gathering, Yu-Gi-Oh! and more), shows market prices and tracks the value of a collection. iPhone and iPad. [App Store](https://apps.apple.com/app/id6758110523)
+- [Volume Booster](https://thevolumebooster.app/): makes music and videos louder, with bass boost, a 6-band equalizer and playback speed control. iPhone and Android. [App Store](https://apps.apple.com/app/id6760180638) · [Google Play](https://play.google.com/store/apps/details?id=com.appcellent.volumebooster)
+- [Colorzy](https://coloringmaker.app/): turns a photo or an idea into a printable coloring page with AI, plus ready-made templates. iPhone and iPad. [App Store](https://apps.apple.com/app/id6772468073)
+- [Decibel Meter](https://noiselevel.app/): a sound level meter with A, C and Z weighting, noise dose tracking and saved measurements. iPhone. [App Store](https://apps.apple.com/app/id6793045784)
+
+## Help
+
+- [Help Center](https://appcellent.com/help): answers for every app
+- [Cancel a subscription](https://appcellent.com/help/cancel-subscription): subscriptions are billed by Apple or Google and cancelled in the store account
+- [Request a refund](https://appcellent.com/help/request-a-refund): refunds are issued by Apple or Google, not by the developer
+- [Restore purchases](https://appcellent.com/help/restore-purchases)
+- [App not working](https://appcellent.com/help/app-not-working)
+- [Contact support](https://appcellent.com/support): support@appcellent.com; partnerships and press: contact@appcellent.com
+
+## Company
+
+- [What's new](https://appcellent.com/updates): every release of every app, with dates and notes ([RSS](https://appcellent.com/updates.xml))
+- [Privacy Policy](https://appcellent.com/privacy) · [Terms of Service](https://appcellent.com/terms)
+- App Store developer page: https://apps.apple.com/developer/appcellent/id1870956141
+- Google Play developer page: https://play.google.com/store/apps/developer?id=appcellent

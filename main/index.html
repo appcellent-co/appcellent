@@ -13,6 +13,11 @@
     <meta property="og:description" content="Simple, useful apps for everyday jobs.">
     <meta property="og:url" content="https://appcellent.com/">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://appcellent.com/img/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Appcellent: useful apps for everyday jobs">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/styles/site.css">
@@ -22,10 +27,14 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": "https://appcellent.com/#organization",
       "name": "Appcellent",
+      "legalName": "Appcellent Yazılım Hizmetleri A.Ş.",
       "url": "https://appcellent.com/",
       "email": "support@appcellent.com",
-      "sameAs": ["https://apps.apple.com/developer/appcellent/id1870956141"]
+      "image": "https://appcellent.com/img/og.png",
+      "address": { "@type": "PostalAddress", "addressLocality": "Nilüfer, Bursa", "addressCountry": "TR" },
+      "sameAs": ["https://apps.apple.com/developer/appcellent/id1870956141", "https://play.google.com/store/apps/developer?id=appcellent"]
     }
     </script>
 </head>
@@ -524,7 +533,7 @@
         <div class="wrap">
             <div>
                 <h2 id="cta-title">Need help with one of our apps?</h2>
-                <p>Write to <a href="mailto:support@appcellent.com">support@appcellent.com</a> or use the contact form.</p>
+                <p>Write to <!--email_off--><a href="mailto:support@appcellent.com">support@appcellent.com</a><!--/email_off--> or use the contact form.</p>
             </div>
             <a class="btn btn-primary" href="/support">Contact support</a>
         </div>
@@ -573,7 +582,7 @@
             </div>
             <div class="footer-bottom">
                 <span>&copy; <span id="year">2026</span> Appcellent. All rights reserved.</span>
-                <a href="mailto:contact@appcellent.com">contact@appcellent.com</a>
+                <!--email_off--><a href="mailto:contact@appcellent.com">contact@appcellent.com</a><!--/email_off-->
             </div>
         </div>
     </footer>
