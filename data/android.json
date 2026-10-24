@@ -10,6 +10,11 @@
       "version": "1.1.0",
       "date": "2026-10-08",
       "notes": "• All-new design with a cleaner stud gauge and live signal graph.\n• New Tools tab: bubble level, hang a picture, TV mount height, screws & anchors.\n• Now in 13 languages."
+    },
+    {
+      "version": "1.1.1",
+      "date": "2026-10-24",
+      "notes": "• Bug fixes and improvements"
     }
   ],
   "co.appcellent.protractor": [
@@ -23,6 +28,11 @@
       "version": "1.1.1",
       "date": "2026-10-08",
       "notes": "• Clearer subscription options: try free for 3 days or choose the annual plan\n• Bug fixes and improvements"
+    },
+    {
+      "version": "1.1.2",
+      "date": "2026-10-24",
+      "notes": "• Bug fixes and improvements"
     }
   ],
   "com.appcellent.volumebooster": [
@@ -31,6 +41,11 @@
       "date": "2026-10-07",
       "notes": "",
       "launch": true
+    },
+    {
+      "version": "1.0.1",
+      "date": "2026-10-24",
+      "notes": "• Bug fixes and improvements"
     }
   ]
 }
