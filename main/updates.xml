@@ -7,6 +7,13 @@
   <description>New features and releases across Appcellent apps.</description>
   <language>en</language>
   <item>
+    <title>TCG Vault 2.3</title>
+    <link>https://appcellent.com/updates?app=tcgvault</link>
+    <guid isPermaLink="false">tcgvault-2.3</guid>
+    <pubDate>Wed, 28 Oct 2026 12:00:00 GMT</pubDate>
+    <description>Dark mode is here: TCG Vault now follows your device&#39;s light or dark appearance. Scanning is more accurate for Pokémon, Yu-Gi-Oh!, One Piece, Lorcana and Digimon cards, including promo and special prints. Plus bug fixes and a smoother experience.</description>
+  </item>
+  <item>
     <title>TCG Vault 2.2</title>
     <link>https://appcellent.com/updates?app=tcgvault</link>
     <guid isPermaLink="false">tcgvault-2.2</guid>
